@@ -1,0 +1,15 @@
+# Idea fils
+.idea
+.history
+
+# MacOs
+.DS_Store
+
+# Dependency directories
+node_modules/
+
+# Environment vars
+.env
+
+# Logs
+*.log
