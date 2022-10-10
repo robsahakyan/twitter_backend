@@ -1,4 +1,3 @@
-import { HttpService } from '@nestjs/axios';
 import type { CanActivate, ExecutionContext } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import { verify } from 'jsonwebtoken';
@@ -12,7 +11,6 @@ import { CacheService } from '../shared/services/cache.service';
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
-    private readonly httpService: HttpService,
     private readonly configService: ApiConfigService,
     private readonly cacheService: CacheService,
   ) {}

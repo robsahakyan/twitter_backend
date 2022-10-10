@@ -1,5 +1,5 @@
 {
-  "name": "web_shop",
+  "name": "nest_auth",
   "version": "1.0.0",
   "description": "",
   "main": "main.ts",
@@ -12,13 +12,15 @@
     "migration:revert": "yarn run typeorm migration:revert",
     "migration:run": "yarn run typeorm migration:run"
   },
-  "author": "Sergey",
+  "author": "Rob",
   "license": "ISC",
   "dependencies": {
     "@nestjs/axios": "^0.0.7",
     "@nestjs/common": "^8.0.6",
     "@nestjs/config": "^1.0.1",
     "@nestjs/core": "^8.0.6",
+    "@nestjs/jwt": "^9.0.0",
+    "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^8.4.4",
     "@nestjs/schematics": "^8.0.11",
     "@nestjs/swagger": "^5.0.9",
@@ -32,6 +34,8 @@
     "lint-staged": "~12.3.2",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
     "pg": "^8.7.1",
     "request-context": "^2.0.0",
     "rxjs": "^7.3.0",
@@ -44,6 +48,7 @@
   },
   "devDependencies": {
     "@nestjs/cli": "^8.1.1",
+    "@types/node": "^18.8.3",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "eslint": "^8.12.0",
