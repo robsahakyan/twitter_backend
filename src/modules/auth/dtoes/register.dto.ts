@@ -15,6 +15,10 @@ export class RegisterDto extends LoginDto {
 
     @ApiProperty()
     @IsPhoneNumber('AM',{message: 'Phone has been Valid Phone number'})
-    phone: string
+    phone: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    birthday: Date;
 
 }

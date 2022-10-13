@@ -1,9 +1,9 @@
 import { RegisterDto } from './../auth/dtoes/register.dto';
 import { UserNotFoundException } from './exception/user-not-found.exception';
 import { Injectable } from '@nestjs/common';
-import type { UserDto } from '../common/modules/user/user.dto';
 import { UserRepository } from './user.repository';
 import { UserEntity } from './user.entity';
+import { UtilsProvider } from '../../providers/utils.provider';
 
 @Injectable()
 export class UserService {
@@ -12,9 +12,9 @@ export class UserService {
   async create(registerDto: RegisterDto) {
     const userEntity = this.userRepository.create(registerDto);
 
-    await this.userRepository.save(userEntity);
+    userEntity.password = await UtilsProvider.generateHash(userEntity.password);
 
-    return userEntity.toDto();
+    return await this.userRepository.save(userEntity);
   }
 
   async getEntityById(userId: string): Promise<UserEntity> {

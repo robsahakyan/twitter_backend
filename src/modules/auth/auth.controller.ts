@@ -6,6 +6,9 @@ import {LoginDto} from "./dtoes/login.dto";
 import {RegisterDto} from "./dtoes/register.dto";
 
 import {UserService} from "../user/user.service";
+import { AuthUser } from '../../decorators/auth-user.decorator';
+import { UserDto } from '../common/modules/user/user.dto';
+import { Auth } from '../../decorators/http.decorators';
 
 
 @Controller('')
@@ -34,11 +37,11 @@ export class AuthController {
     return this.authService.registerAndLogin(registerDto);
   }
 
-//   @Get('/me')
-//   @HttpCode(HttpStatus.OK)
-//   @ApiOkResponse({ type: UserDto, description: 'Get Auth User' })
-//   @Auth(RoleEnum.ADMIN, RoleEnum.CUSTOMER)
-//   async me(@AuthUser() user: UserDto): Promise<UserDto> {
-//     return (await this.userService.getEntityById(user.id)).toDto()
-//   }
+  @Get('/me')
+  @HttpCode(HttpStatus.OK)
+  @Auth()
+  @ApiOkResponse({ type: UserDto, description: 'Get Auth User' })
+  async me(@AuthUser() user: UserDto): Promise<UserDto> {
+    return (await this.userService.getEntityById(user.id)).toDto()
+  }
 }
