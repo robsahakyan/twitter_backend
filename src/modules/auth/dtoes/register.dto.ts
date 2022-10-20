@@ -1,6 +1,6 @@
 import {LoginDto} from "./login.dto";
-import {ApiProperty} from "@nestjs/swagger";
-import {IsNotEmpty, IsPhoneNumber, IsString} from "class-validator";
+import {ApiProperty, ApiPropertyOptional} from "@nestjs/swagger";
+import {IsNotEmpty, IsPhoneNumber, IsString, IsOptional} from "class-validator";
 
 export class RegisterDto extends LoginDto {
     @ApiProperty()
@@ -17,8 +17,8 @@ export class RegisterDto extends LoginDto {
     @IsPhoneNumber('AM',{message: 'Phone has been Valid Phone number'})
     phone: string;
 
-    @ApiProperty()
-    @IsNotEmpty()
+    @ApiPropertyOptional()
+    @IsOptional()
     birthday: Date;
 
 }

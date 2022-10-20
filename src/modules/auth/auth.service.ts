@@ -45,22 +45,6 @@ export class AuthService {
     return userEntity;
   }
 
-  async checkPasswordStrongility(registerDto: RegisterDto): Promise<void>{
-    const password = registerDto.password.toLowerCase();
-    const credentials = {...registerDto};
-    delete credentials.password;
-
-    for (let key in credentials) {
-      let iter = credentials[key].toLowerCase();
-      for (let i = 0; i < iter.length - 2; ++i) {
-        let str = iter[i] + iter[i + 1] + iter[i + 2];
-        if (password.includes(str)) {
-          throw new UserUnauthenticatedException("This password can be easily guessed,use strong password")
-        }
-      };
-    }
-  }
-
   async login(userInfo: LoginDto | UserEntity): Promise<LoginPayloadDto> {
     let userEntity: UserEntity;
     if(userInfo instanceof UserEntity) {
@@ -76,7 +60,6 @@ export class AuthService {
   }
 
   async registerAndLogin(registerDto: RegisterDto): Promise<LoginPayloadDto> {
-    await this.checkPasswordStrongility(registerDto);
     const userEntity = await this.userService.create(registerDto)
     .catch((err) => {
       throw new UserUnauthenticatedException(err);
