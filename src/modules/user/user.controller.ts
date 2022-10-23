@@ -18,7 +18,7 @@ export class UserController {
   @Auth()
   @ApiOkResponse({ type: RegisterDto, description: 'Successfully got' })
     async getUser(@Param('id') userId: string): Promise<UserDto> {
-        return (await this.userService.getEntityById(userId)).toDto();
+        return (await this.userService.getByUserId(userId))
     }
 
   @Get()

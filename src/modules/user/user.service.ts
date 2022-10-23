@@ -39,6 +39,10 @@ export class UserService {
     return userEntity;
   }
 
+  async getByUserId(userId: string): Promise<UserDto> {
+    return (await this.getEntityById(userId)).toDto()
+  }
+
   async updateUser(userId: string, userData: RegisterDto): Promise<UpdateResult> {
       const currentUser = await this.userRepository.findById(userId);
       currentUser.password = await UtilsProvider.generateHash(currentUser.password);
