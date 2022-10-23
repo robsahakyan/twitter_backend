@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from '../common/entities/abstract.entity';
 import { UserDto } from '../common/modules/user/user.dto';
-import { FolowEntity } from '../../modules/folow/folow.entity';
+import { FollowEntity } from '../follow/follow.entity';
 @Entity({ name: 'users' })
 export class UserEntity extends AbstractEntity<UserDto> {
   @Column({ unique: true })
@@ -23,11 +23,11 @@ export class UserEntity extends AbstractEntity<UserDto> {
   birthday: Date;
 
 
-  @OneToMany(() => FolowEntity, (folow) => folow.folower)
-  folower: FolowEntity[];
+  @OneToMany(() => FollowEntity, (follow) => follow.follower)
+  follower: FollowEntity[];
 
-  @OneToMany(() => FolowEntity, (folow) => folow.folowing)
-  folowing: FolowEntity[];
+  @OneToMany(() => FollowEntity, (follow) => follow.following)
+  following: FollowEntity[];
   
   dtoClass = UserDto;
 }

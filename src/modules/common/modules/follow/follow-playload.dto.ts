@@ -1,16 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {UserDto} from "../user/user.dto";
 import {TokenPayloadDto} from "../auth/token-payload.dto";
-import { FolowDto } from './folow.dto';
+import { FollowDto } from './follow.dto';
 
 
-export class FolowPayloadDto {
+export class FollowPayloadDto {
     @ApiProperty({ type: UserDto })
     user: UserDto;
-    folowing:FolowDto;
+    following:FollowDto;
 
-    constructor(user: UserDto,folowing:FolowDto) {
+    constructor(user: UserDto,following:FollowDto) {
         this.user = user;
-        this.folowing = folowing;
+        this.following = following;
     }
 }
