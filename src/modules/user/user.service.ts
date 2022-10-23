@@ -4,6 +4,10 @@ import { Injectable } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { UserEntity } from './user.entity';
 import { UtilsProvider } from '../../providers/utils.provider';
+import { DeleteResult, UpdateResult } from 'typeorm';
+import { AuthUser } from 'decorators/auth-user.decorator';
+import { AuthController } from 'modules/auth/auth.controller';
+import { UserDto } from 'modules/common/modules/user/user.dto';
 
 @Injectable()
 export class UserService {
@@ -34,4 +38,27 @@ export class UserService {
 
     return userEntity;
   }
+
+  async updateUser(userId: string, userData: RegisterDto): Promise<UpdateResult> {
+      const currentUser = await this.userRepository.findById(userId);
+      currentUser.password = await UtilsProvider.generateHash(currentUser.password);
+      if (userId != currentUser.id) {
+          throw new UserNotFoundException();
+      }      
+        return this.userRepository.update(userId, userData);
+  }
+
+  async deleteUser(id: string): Promise<DeleteResult> {
+    const currentUser = await this.userRepository.findById(id);
+    if (id != currentUser.id) {
+        throw new UserNotFoundException();
+    } 
+    return this.userRepository.delete(id);
+  }
+
+  async getAll(): Promise<UserDto[]> {
+      const users = await  this.userRepository.find();
+      return users.map(user => user.toDto())
+  }
+
 }
