@@ -12,7 +12,8 @@ import type { AbstractEntity } from './modules/common/entities/abstract.entity';
 
 declare global {
   // Just to differ types where class instance is not mandatory and plain object can work as well
-  type Plain<T> = T;
+  type Plain<T> = T; 
+  type Uuid = string & { _uuidBrand: undefined };
 
   interface Array<T> {
     toDtos<Entity extends AbstractEntity<Dto>, Dto extends AbstractDto>(
