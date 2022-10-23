@@ -1,3 +1,5 @@
+import './boilerplate.polyfill';
+import { TweetModule } from './modules/tweet/tweet.module';
 import type { MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
@@ -13,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     UserModule,
     AuthModule,
+    TweetModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',

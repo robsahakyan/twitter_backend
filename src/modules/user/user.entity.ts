@@ -1,4 +1,5 @@
-import { Column, Entity } from 'typeorm';
+import { TweetEntity } from './../tweet/tweet.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from '../common/entities/abstract.entity';
 import { UserDto } from '../common/modules/user/user.dto';
 
@@ -21,6 +22,9 @@ export class UserEntity extends AbstractEntity<UserDto> {
 
   @Column({nullable: true})
   birthday: Date;
+
+  @OneToMany(() => TweetEntity, (tweet) => tweet.user)
+  tweet:  TweetEntity;
 
   dtoClass = UserDto;
 }

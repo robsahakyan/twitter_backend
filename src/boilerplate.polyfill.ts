@@ -15,12 +15,12 @@ declare global {
   type Plain<T> = T;
 
   interface Array<T> {
-    toDtos<Entity extends AbstractEntity<Dto>, Dto extends AbstractDto>(
+    toDtos<Dto extends AbstractDto>(
       this: T[],
-      options?: any,
+      options?: unknown,
     ): Dto[];
 
-    toPageDto<Entity extends AbstractEntity<Dto>, Dto extends AbstractDto>(
+    toPageDto<Dto extends AbstractDto>(
       this: T[],
       pageMetaDto: PageMetaDto,
     ): PageDto<Dto>;
