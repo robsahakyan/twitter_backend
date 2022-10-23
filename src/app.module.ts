@@ -1,3 +1,4 @@
+import   '../src/boilerplate.polyfill';
 import type { MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
@@ -7,12 +8,13 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ApiConfigService } from './shared/services/api-config.service';
 import { SharedModule } from './shared/shared.module';
-
+import { FollowModule } from './modules/follow/follow.module';
 @Module({
   imports: [
     SharedModule,
     UserModule,
     AuthModule,
+    FollowModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',

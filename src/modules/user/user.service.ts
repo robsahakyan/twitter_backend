@@ -1,6 +1,6 @@
 import { UpdateUserDto } from './dtoes/update-user.dto';
 import { RegisterDto } from './../auth/dtoes/register.dto';
-import { UserNotFoundException } from './exception/user-not-found.exception';
+import { UserNotFoundException } from './exceptions/user-not-found.exception';
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { UserEntity } from './user.entity';
