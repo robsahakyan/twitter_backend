@@ -1,3 +1,4 @@
+import { UpdateUserDto } from './dtoes/update-user.dto';
 import { RegisterDto } from './../auth/dtoes/register.dto';
 import { UserNotFoundException } from './exception/user-not-found.exception';
 import { Injectable } from '@nestjs/common';
@@ -43,13 +44,15 @@ export class UserService {
     return (await this.getEntityById(userId)).toDto()
   }
 
-  async updateUser(userId: string, userData: RegisterDto): Promise<UpdateResult> {
+  async updateUser(userId: string, updateUserDto: UpdateUserDto): Promise<UserDto> {
       const currentUser = await this.userRepository.findById(userId);
       currentUser.password = await UtilsProvider.generateHash(currentUser.password);
       if (userId != currentUser.id) {
           throw new UserNotFoundException();
       }      
-        return this.userRepository.update(userId, userData);
+        await this.userRepository.update(userId, updateUserDto);
+
+        return this.getByUserId(userId);
   }
 
   async deleteUser(id: string): Promise<DeleteResult> {

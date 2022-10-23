@@ -1,3 +1,4 @@
+import { UpdateUserDto } from './dtoes/update-user.dto';
 import { Body, Controller, Delete, Get, Param, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { AuthUser } from '../../decorators/auth-user.decorator';
@@ -31,12 +32,13 @@ export class UserController {
 
   @Put(':id')
   @Auth()
-  @ApiOkResponse({ type: RegisterDto, description: 'Successfully updated' })
+  @ApiOkResponse({ type: UserDto, description: 'Successfully updated' })
     update(
         @Param('id') id: string,
-        @Body() registerDto: RegisterDto,
-    ) : Promise<UpdateResult> {
-        return this.userService.updateUser(id, registerDto);
+        @Body() updateUserDto: UpdateUserDto,
+    ) : Promise<UserDto> {
+        console.log(5555555555555)
+        return this.userService.updateUser(id, updateUserDto);
     }
 
   @Delete(':id') 
