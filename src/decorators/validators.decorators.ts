@@ -18,7 +18,7 @@ export function IsPassword(
             return false;
           }
 
-          return (/((?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]))/).test(value);
+          return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%.*#?&])[A-Za-z\d@$!.%*#?&]{8,}$/.test(value);
         },
       },
     });

@@ -9,13 +9,14 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ApiConfigService } from './shared/services/api-config.service';
 import { SharedModule } from './shared/shared.module';
-
+import { FollowModule } from './modules/follow/follow.module';
 @Module({
   imports: [
     SharedModule,
     UserModule,
     AuthModule,
     TweetModule,
+    FollowModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
