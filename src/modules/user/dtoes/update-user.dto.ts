@@ -17,14 +17,6 @@ export class UpdateUserDto {
     @ApiPropertyOptional()
     @IsOptional()
     @IsPhoneNumber('AM',{message: 'Phone has been Valid Phone number'})
-    phone?: string | undefined;
+    phone?: string;
 
-    @ApiPropertyOptional()
-    @IsOptional()
-    birthday?: Date;
-
-    @ApiPropertyOptional()
-    @IsOptional()
-    @IsPassword()
-    password?: string;
 }

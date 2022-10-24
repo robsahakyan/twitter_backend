@@ -22,8 +22,5 @@ export class FollowEntity extends AbstractEntity<FollowDto> {
   @JoinColumn({ name: 'following_id' })
   following?: UserEntity;
 
-
-
-
   dtoClass = FollowDto;
 }

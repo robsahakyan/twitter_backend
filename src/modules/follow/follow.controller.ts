@@ -1,30 +1,31 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { JwtGuard } from '../auth/jwt.guart';
-import { FollowPayloadDto } from 'modules/common/modules/follow/follow-playload.dto';
-import { FollowDto } from '../common/modules/follow/follow.dto';
 import { FollowService } from './follow.service';
 import { AuthUser } from '../../decorators/auth-user.decorator';
 import { UserDto } from '../common/modules/user/user.dto';
+import { updateParameter } from 'typescript';
+import { Auth } from '../../decorators/http.decorators';
 @Controller('followers')
 @ApiTags('followers')
-@UseGuards(JwtGuard)
-
 export class FollowController {
   constructor(public readonly followService: FollowService) {}
 
-
-  @Post()
+  @Post(":followingId")
+  @Auth()
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({ type: String, description: 'Successfully ' })
   async follow(
-    @Body() followDto,
+    @Param('followingId') followingId: string,
     @AuthUser() user: UserDto
     ) {
-    return this.followService.follow(followDto,user);
+    return this.followService.follow(followingId, user);
     
   }
 
+  @Get()
+  @Auth()
+  async getUserFollowers(@AuthUser() user: UserDto) {
+    return this.followService.getUserFollowers(user)
+  }
 
 }

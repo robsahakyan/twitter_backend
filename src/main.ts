@@ -17,7 +17,7 @@ import { AppModule } from './app.module';
 import { setupSwagger } from './setup-swagger';
 import { ApiConfigService } from './shared/services/api-config.service';
 import { SharedModule } from './shared/shared.module';
-
+import cors from 'cors'
 async function bootstrap() {
   initializeTransactionalContext();
   patchTypeORMRepositoryWithBaseRepository();
@@ -27,6 +27,7 @@ async function bootstrap() {
   const { appConfig } = app.select(SharedModule).get(ApiConfigService);
 
   app.use(helmet());
+  app.use(cors())
   app.use(compression());
   app.use(morgan('combined'));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));

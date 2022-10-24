@@ -37,7 +37,6 @@ export class UserController {
         @Param('id') id: string,
         @Body() updateUserDto: UpdateUserDto,
     ) : Promise<UserDto> {
-        console.log(5555555555555)
         return this.userService.updateUser(id, updateUserDto);
     }
 
@@ -47,7 +46,6 @@ export class UserController {
     delete(
         @Param('id') id: string
     ): Promise<DeleteResult> {
-        
         return this.userService.deleteUser(id);
     }
 }
